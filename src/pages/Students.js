@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import fetchProducts from "./redux/fetchProducts";
+import fetchProducts from "../redux/fetchProducts";
 import { useSelector, useDispatch } from "react-redux";
 import { TailSpin } from "react-loader-spinner";
 import Collapse from "@mui/material/Collapse";
 import Button from "@mui/material/Button";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
-
-import "./assets/styles/styles.css";
+import Search from "./Search";
+import "../assets/styles/styles.css";
 
 const Students = () => {
   const dispatch = useDispatch();
   const store = useSelector((state) => state.productsReducer);
-
+  const [deneme, setDeneme] = useState("");
   const [filteredResults, setFilteredResults] = useState([]);
   const [robotStudents, setRobotStudents] = useState([]);
   const [searchInputByName, setSearchInputByName] = useState("");
@@ -162,7 +162,9 @@ const Students = () => {
     const avg = sum / gradesArray.length;
     return avg.toFixed(2);
   };
-
+  const changeSearchInput = (event) => {
+    setDeneme(event);
+  };
   const addTag = (id, tagName) => {
     setRobotStudents(
       robotStudents.map((item) =>
@@ -170,21 +172,18 @@ const Students = () => {
       )
     );
   };
+  console.log(deneme);
   return (
     <div>
       {store.pending && <TailSpin height={180} width={180} />}
-      <input
-        icon="search"
-        placeholder="Search by name"
-        className="search"
-        onChange={(e) => setSearchInputByName(e.target.value)}
-      />
-      <input
-        icon="search"
-        placeholder="Search by name"
-        className="search"
-        onChange={(e) => setSearchInputByTag(e.target.value)}
-      />
+      <Search
+        placeholder={"Search by name"}
+        changeSearchInput={setSearchInputByName}
+      ></Search>
+      <Search
+        placeholder={"Search by Tag"}
+        changeSearchInput={setSearchInputByTag}
+      ></Search>
       {searchInputByName.length > 0 || searchInputByTag.length > 0 ? (
         <Student studentArray={filteredResults}></Student>
       ) : (
