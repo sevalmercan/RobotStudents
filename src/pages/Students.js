@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import fetchProducts from "../redux/fetchProducts";
 import { useSelector, useDispatch } from "react-redux";
 import { TailSpin } from "react-loader-spinner";
-import Collapse from "@mui/material/Collapse";
-import Button from "@mui/material/Button";
-import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import Search from "./Search";
 import Student from "./Student";
 import "../assets/styles/styles.css";
@@ -46,6 +43,7 @@ const Students = () => {
           )
       );
       setFilteredResults(filteredData);
+      return;
     } else if (searchInputByName) {
       const filteredData = robotStudents.filter(
         (student) =>
@@ -57,6 +55,7 @@ const Students = () => {
             .includes(searchInputByName.toLowerCase())
       );
       setFilteredResults(filteredData);
+      return;
     } else if (searchInputByTag) {
       const filteredData = robotStudents.filter((student) =>
         student.tags?.some((tag) =>
@@ -64,9 +63,9 @@ const Students = () => {
         )
       );
       setFilteredResults(filteredData);
-    } else {
-      setFilteredResults(robotStudents);
+      return;
     }
+    setFilteredResults(robotStudents);
   }, [searchInputByName, searchInputByTag, robotStudents]);
 
   return (
