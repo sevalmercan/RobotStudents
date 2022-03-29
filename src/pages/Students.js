@@ -30,30 +30,22 @@ const Students = () => {
     if (!searchInputByName && !searchInputByTag) return;
 
     if (searchInputByName && searchInputByTag) {
-      const filteredData = robotStudents.filter(
-        (student) =>
-          (student.firstName
-            .toLowerCase()
-            .includes(searchInputByName.toLowerCase()) ||
-            student.lastName
-              .toLowerCase()
-              .includes(searchInputByName.toLowerCase())) &&
+      const filteredData = robotStudents.filter((student) => {
+        const name = student.firstName + " " + student.lastName;
+        return (
+          name.toLowerCase().includes(searchInputByName.toLowerCase()) &&
           student.tags?.some((tag) =>
             tag.toLowerCase().includes(searchInputByTag.toLowerCase())
           )
-      );
+        );
+      });
       setFilteredResults(filteredData);
       return;
     } else if (searchInputByName) {
-      const filteredData = robotStudents.filter(
-        (student) =>
-          student.firstName
-            .toLowerCase()
-            .includes(searchInputByName.toLowerCase()) ||
-          student.lastName
-            .toLowerCase()
-            .includes(searchInputByName.toLowerCase())
-      );
+      const filteredData = robotStudents.filter((student) => {
+        const name = student.firstName + " " + student.lastName;
+        return name.toLowerCase().includes(searchInputByName.toLowerCase());
+      });
       setFilteredResults(filteredData);
       return;
     } else if (searchInputByTag) {
