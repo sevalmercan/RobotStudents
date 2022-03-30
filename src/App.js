@@ -1,5 +1,4 @@
-import "./App.css";
-import Students from "./Students";
+import Students from "../src/pages/Students";
 
 function App() {
   return (
