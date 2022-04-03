@@ -4,7 +4,7 @@ import { handleFilterOpening, calculateGrades } from "../helpers/helpers";
 import CollapseMenu from "./CollapseMenu";
 import Tags from "./Tags";
 
-const Student = ({ studentArray, setRobotStudents }) => {
+const Student = ({ studentArray, setOriginalStudents }) => {
   return (
     <div>
       {studentArray?.map((student) => (
@@ -23,27 +23,21 @@ const Student = ({ studentArray, setRobotStudents }) => {
                 <div> Email: {student.email}</div>
                 <div> Company: {student.company} </div>
                 <div> Skill: {student.skill} </div>
-                <div>
-                  Avarage:{" "}
-                  {calculateGrades(
-                    student.grades,
-                    setRobotStudents,
-                    studentArray
-                  )}
-                  %
-                </div>
+                <div>Avarage: {calculateGrades(student.grades)}%</div>
               </div>
               <CollapseMenu studentArray={studentArray} student={student} />
               <Tags
                 studentArray={studentArray}
                 student={student}
-                setRobotStudents={setRobotStudents}
+                setOriginalStudents={setOriginalStudents}
               />
             </div>
             <div
               className="icon"
               onClick={() =>
-                setRobotStudents(handleFilterOpening(student.id, studentArray))
+                setOriginalStudents(
+                  handleFilterOpening(student.id, studentArray)
+                )
               }
             >
               {!studentArray?.find((item) => item.id === student.id)?.open ? (

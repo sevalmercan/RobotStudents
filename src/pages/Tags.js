@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 import { addTag } from "../helpers/helpers";
-const Tags = ({ studentArray, student, setRobotStudents }) => {
+const Tags = ({ studentArray, student, setOriginalStudents }) => {
   return (
     <div>
       <div className="tags">
@@ -17,7 +17,7 @@ const Tags = ({ studentArray, student, setRobotStudents }) => {
         placeholder="Add tag"
         onKeyPress={(event) => {
           if (event.key === "Enter") {
-            setRobotStudents(
+            setOriginalStudents(
               addTag(student.id, event.target.value, studentArray)
             );
           }

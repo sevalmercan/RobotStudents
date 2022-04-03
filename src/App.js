@@ -1,11 +1,7 @@
-import Students from "../src/pages/Students";
+import RobotStudents from "./containers/RobotStudents";
 
 function App() {
-  return (
-    <div className="App">
-      <Students></Students>
-    </div>
-  );
+  return <RobotStudents />;
 }
 
 export default App;

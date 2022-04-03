@@ -21,7 +21,11 @@ export function productsReducer(state = initialState, action) {
       return {
         ...state,
         pending: false,
-        products: action.payload.students,
+        products: action.payload.students.map((student) => ({
+          ...student,
+          tags: [],
+          open: false,
+        })),
       };
     case FETCH_PRODUCTS_ERROR:
       return {
